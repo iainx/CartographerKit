@@ -1,6 +1,7 @@
 CartographerKit
 ===============
 
+![Cartographer Window](https://raw.githubusercontent.com/iainx/CartographerKit/master/screenshots/cartographer-window.png)
 # Overview
 
 Code for parsing Cartographer files.
