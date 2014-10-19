@@ -35,6 +35,12 @@ NSString * const kCRTJSONPinColorRedName = @"red";
 NSString * const kCRTJSONPinColorGreenName = @"green";
 NSString * const kCRTJSONPinColorPurpleName = @"purple";
 
+#if defined TARGET_OS_IPHONE
+typedef UIColor CRTColor;
+#else
+typedef NSColor CRTColor;
+#endif
+
 #define UNSQUASH_R_F(v) ((v >> 24) / 255.)
 #define UNSQUASH_G_F(v) (((v & (0xFF << 16)) >> 16) / 255.)
 #define UNSQUASH_B_F(v) (((v & (0xFF << 8)) >> 8) / 255.)
@@ -64,7 +70,7 @@ pointArrayFromJSON(NSArray *pointsArray)
     return points;
 }
 
-static NSColor *
+static CRTColor *
 colorFromSquashedColor(UInt32 squashedColor)
 {
     CGFloat r = UNSQUASH_R_F(squashedColor);
@@ -72,7 +78,11 @@ colorFromSquashedColor(UInt32 squashedColor)
     CGFloat b = UNSQUASH_B_F(squashedColor);
     CGFloat a = UNSQUASH_A_F(squashedColor);
     
+#if defined TARGET_OS_IPHONE
+    return [UIColor colorWithRed:r green:g blue:b alpha:a];
+#else
     return [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
+#endif
 }
 
 + (void)enumerateShapesFromJSON:(NSDictionary *)jsonDict
