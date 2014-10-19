@@ -35,7 +35,7 @@ NSString * const kCRTJSONPinColorRedName = @"red";
 NSString * const kCRTJSONPinColorGreenName = @"green";
 NSString * const kCRTJSONPinColorPurpleName = @"purple";
 
-#if defined TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
 typedef UIColor CRTColor;
 #else
 typedef NSColor CRTColor;
@@ -78,7 +78,7 @@ colorFromSquashedColor(UInt32 squashedColor)
     CGFloat b = UNSQUASH_B_F(squashedColor);
     CGFloat a = UNSQUASH_A_F(squashedColor);
     
-#if defined TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
     return [UIColor colorWithRed:r green:g blue:b alpha:a];
 #else
     return [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
